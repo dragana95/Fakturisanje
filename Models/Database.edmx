@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LocalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DokumentFakture">
+          <Key>
+            <PropertyRef Name="RedniBroj" />
+          </Key>
+          <Property Name="DatumFakture" Type="date" Nullable="false" />
+          <Property Name="RedniBroj" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ukupno" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StavkaFakture">
+          <Key>
+            <PropertyRef Name="RedniBroj" />
+          </Key>
+          <Property Name="RedniBroj" Type="int" Nullable="false" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+          <Property Name="Cena" Type="float" Nullable="false" />
+          <Property Name="Ukupno" Type="float" Nullable="false" />
+          <Property Name="FK_DokumentFakture" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__StavkaFak__FK_Do__25869641">
+          <End Role="DokumentFakture" Type="Self.DokumentFakture" Multiplicity="1" />
+          <End Role="StavkaFakture" Type="Self.StavkaFakture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DokumentFakture">
+              <PropertyRef Name="RedniBroj" />
+            </Principal>
+            <Dependent Role="StavkaFakture">
+              <PropertyRef Name="FK_DokumentFakture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocalDBModelStoreContainer">
+          <EntitySet Name="DokumentFakture" EntityType="Self.DokumentFakture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StavkaFakture" EntityType="Self.StavkaFakture" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__StavkaFak__FK_Do__25869641" Association="Self.FK__StavkaFak__FK_Do__25869641">
+            <End Role="DokumentFakture" EntitySet="DokumentFakture" />
+            <End Role="StavkaFakture" EntitySet="StavkaFakture" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LocalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DokumentFakture">
+          <Key>
+            <PropertyRef Name="RedniBroj" />
+          </Key>
+          <Property Name="DatumFakture" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RedniBroj" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ukupno" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StavkaFaktures" Relationship="Self.FK__StavkaFak__FK_Do__25869641" FromRole="DokumentFakture" ToRole="StavkaFakture" />
+        </EntityType>
+        <EntityType Name="StavkaFakture">
+          <Key>
+            <PropertyRef Name="RedniBroj" />
+          </Key>
+          <Property Name="RedniBroj" Type="Int32" Nullable="false" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <Property Name="Cena" Type="Double" Nullable="false" />
+          <Property Name="Ukupno" Type="Double" Nullable="false" />
+          <Property Name="FK_DokumentFakture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DokumentFakture" Relationship="Self.FK__StavkaFak__FK_Do__25869641" FromRole="StavkaFakture" ToRole="DokumentFakture" />
+        </EntityType>
+        <Association Name="FK__StavkaFak__FK_Do__25869641">
+          <End Role="DokumentFakture" Type="Self.DokumentFakture" Multiplicity="1" />
+          <End Role="StavkaFakture" Type="Self.StavkaFakture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DokumentFakture">
+              <PropertyRef Name="RedniBroj" />
+            </Principal>
+            <Dependent Role="StavkaFakture">
+              <PropertyRef Name="FK_DokumentFakture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LocalDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DokumentFaktures" EntityType="Self.DokumentFakture" />
+          <EntitySet Name="StavkaFaktures" EntityType="Self.StavkaFakture" />
+          <AssociationSet Name="FK__StavkaFak__FK_Do__25869641" Association="Self.FK__StavkaFak__FK_Do__25869641">
+            <End Role="DokumentFakture" EntitySet="DokumentFaktures" />
+            <End Role="StavkaFakture" EntitySet="StavkaFaktures" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LocalDBModelStoreContainer" CdmEntityContainer="LocalDBEntities">
+          <EntitySetMapping Name="DokumentFaktures">
+            <EntityTypeMapping TypeName="LocalDBModel.DokumentFakture">
+              <MappingFragment StoreEntitySet="DokumentFakture">
+                <ScalarProperty Name="DatumFakture" ColumnName="DatumFakture" />
+                <ScalarProperty Name="RedniBroj" ColumnName="RedniBroj" />
+                <ScalarProperty Name="Ukupno" ColumnName="Ukupno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StavkaFaktures">
+            <EntityTypeMapping TypeName="LocalDBModel.StavkaFakture">
+              <MappingFragment StoreEntitySet="StavkaFakture">
+                <ScalarProperty Name="RedniBroj" ColumnName="RedniBroj" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Ukupno" ColumnName="Ukupno" />
+                <ScalarProperty Name="FK_DokumentFakture" ColumnName="FK_DokumentFakture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

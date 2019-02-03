@@ -1,0 +1,47 @@
+﻿@model Fakturisanje.Models.DokumentFakture
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Brisanje</h2>
+
+<h3>Da li ste sigurni da zelite da obrisete ovu fakturu?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DatumFakture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatumFakture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RedniBroj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RedniBroj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ukupno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ukupno)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Obrisi" class="btn btn-default" /> |
+            @Html.ActionLink("Povratak na listu", "Index")
+        </div>
+    }
+</div>

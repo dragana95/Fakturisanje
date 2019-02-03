@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DokumentFakture">
+    <Key>
+      <PropertyRef Name="RedniBroj" />
+    </Key>
+    <Property Name="DatumFakture" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="RedniBroj" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ukupno" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="StavkaFaktures" Relationship="Self.FK__StavkaFak__FK_Do__25869641" FromRole="DokumentFakture" ToRole="StavkaFakture" />
+  </EntityType>
+  <EntityType Name="StavkaFakture">
+    <Key>
+      <PropertyRef Name="RedniBroj" />
+    </Key>
+    <Property Name="RedniBroj" Type="Int32" Nullable="false" />
+    <Property Name="Kolicina" Type="Int32" Nullable="false" />
+    <Property Name="Cena" Type="Double" Nullable="false" />
+    <Property Name="Ukupno" Type="Double" Nullable="false" />
+    <Property Name="FK_DokumentFakture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DokumentFakture" Relationship="Self.FK__StavkaFak__FK_Do__25869641" FromRole="StavkaFakture" ToRole="DokumentFakture" />
+  </EntityType>
+  <Association Name="FK__StavkaFak__FK_Do__25869641">
+    <End Role="DokumentFakture" Type="Self.DokumentFakture" Multiplicity="1" />
+    <End Role="StavkaFakture" Type="Self.StavkaFakture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DokumentFakture">
+        <PropertyRef Name="RedniBroj" />
+      </Principal>
+      <Dependent Role="StavkaFakture">
+        <PropertyRef Name="FK_DokumentFakture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LocalDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DokumentFaktures" EntityType="Self.DokumentFakture" />
+    <EntitySet Name="StavkaFaktures" EntityType="Self.StavkaFakture" />
+    <AssociationSet Name="FK__StavkaFak__FK_Do__25869641" Association="Self.FK__StavkaFak__FK_Do__25869641">
+      <End Role="DokumentFakture" EntitySet="DokumentFaktures" />
+      <End Role="StavkaFakture" EntitySet="StavkaFaktures" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

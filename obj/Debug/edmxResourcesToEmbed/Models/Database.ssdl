@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LocalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DokumentFakture">
+    <Key>
+      <PropertyRef Name="RedniBroj" />
+    </Key>
+    <Property Name="DatumFakture" Type="date" Nullable="false" />
+    <Property Name="RedniBroj" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Ukupno" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StavkaFakture">
+    <Key>
+      <PropertyRef Name="RedniBroj" />
+    </Key>
+    <Property Name="RedniBroj" Type="int" Nullable="false" />
+    <Property Name="Kolicina" Type="int" Nullable="false" />
+    <Property Name="Cena" Type="float" Nullable="false" />
+    <Property Name="Ukupno" Type="float" Nullable="false" />
+    <Property Name="FK_DokumentFakture" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__StavkaFak__FK_Do__25869641">
+    <End Role="DokumentFakture" Type="Self.DokumentFakture" Multiplicity="1" />
+    <End Role="StavkaFakture" Type="Self.StavkaFakture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DokumentFakture">
+        <PropertyRef Name="RedniBroj" />
+      </Principal>
+      <Dependent Role="StavkaFakture">
+        <PropertyRef Name="FK_DokumentFakture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LocalDBModelStoreContainer">
+    <EntitySet Name="DokumentFakture" EntityType="Self.DokumentFakture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StavkaFakture" EntityType="Self.StavkaFakture" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__StavkaFak__FK_Do__25869641" Association="Self.FK__StavkaFak__FK_Do__25869641">
+      <End Role="DokumentFakture" EntitySet="DokumentFakture" />
+      <End Role="StavkaFakture" EntitySet="StavkaFakture" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

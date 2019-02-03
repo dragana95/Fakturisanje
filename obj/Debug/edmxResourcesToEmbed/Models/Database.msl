@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LocalDBModelStoreContainer" CdmEntityContainer="LocalDBEntities">
+    <EntitySetMapping Name="DokumentFaktures">
+      <EntityTypeMapping TypeName="LocalDBModel.DokumentFakture">
+        <MappingFragment StoreEntitySet="DokumentFakture">
+          <ScalarProperty Name="DatumFakture" ColumnName="DatumFakture" />
+          <ScalarProperty Name="RedniBroj" ColumnName="RedniBroj" />
+          <ScalarProperty Name="Ukupno" ColumnName="Ukupno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StavkaFaktures">
+      <EntityTypeMapping TypeName="LocalDBModel.StavkaFakture">
+        <MappingFragment StoreEntitySet="StavkaFakture">
+          <ScalarProperty Name="RedniBroj" ColumnName="RedniBroj" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Ukupno" ColumnName="Ukupno" />
+          <ScalarProperty Name="FK_DokumentFakture" ColumnName="FK_DokumentFakture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
